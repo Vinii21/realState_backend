@@ -5,6 +5,7 @@ import { configDB } from './config/db.config';
 import { config } from './config/config';
 import { EstatesModule } from './estates/estates.module';
 import { AuthModule } from './auth/auth.module';
+import { Auth } from './auth/entities/auth.entity';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { AuthModule } from './auth/auth.module';
         username: configService.user,
         password: configService.password,
         database: configService.nameDB,
-        entities: [], // Aquí puedes agregar las entidades que vas a usar
+        entities: [Auth], // Aquí puedes agregar las entidades que vas a usar
         synchronize: true, // ¡Solo en desarrollo! No usar en producción.
       }),
     }),
