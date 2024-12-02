@@ -3,6 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigType } from '@nestjs/config';
 import { configDB } from './config/db.config';
 import { config } from './config/config';
+import { EstatesModule } from './estates/estates.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { config } from './config/config';
         synchronize: true, // ¡Solo en desarrollo! No usar en producción.
       }),
     }),
+    EstatesModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
