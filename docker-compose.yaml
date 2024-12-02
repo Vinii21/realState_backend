@@ -5,24 +5,24 @@ services:
     image: postgres
     container_name: postgres-container
     ports:
-      - "${POSTGRES_PORT_PC}:${POSTGRES_PORT_CONTAINER}" # Usa variables para los puertos
+      - "${POSTGRES_PORT_PC}:${POSTGRES_PORT_CONTAINER}" # Mapeo de puertos desde variables de entorno
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}       # Usuario de la base de datos
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} # Contraseña del usuario
+      POSTGRES_DB: ${POSTGRES_DB}          # Nombre de la base de datos
     volumes:
-      - postgres_data:/var/lib/postgresql/data # Persistencia de datos
+      - postgres_data:/var/lib/postgresql/data # Persistencia de datos de PostgreSQL
 
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin-container
     ports:
-      - "${PGADMIN_LISTEN_PORT_PC}:${PGADMIN_LISTEN_PORT_CONTAINER}" # Usa variables para los puertos
+      - "${PGADMIN_LISTEN_PORT_PC}:${PGADMIN_LISTEN_PORT_CONTAINER}" # Mapeo de puertos desde variables de entorno
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}   # Correo de acceso a pgAdmin
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD} # Contraseña de acceso a pgAdmin
     depends_on:
-      - postgres
+      - postgres # Asegura que PostgreSQL esté iniciado antes de pgAdmin
 
 volumes:
-  postgres_data: # Volumen para persistencia de PostgreSQL
+  postgres_data: # Volumen para persistencia de datos de PostgreSQL
